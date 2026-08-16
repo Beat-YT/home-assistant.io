@@ -2,7 +2,6 @@
 title: Hydro-Québec Peak Events
 description: Instructions on how to integrate Hydro-Québec peak events into Home Assistant.
 ha_category:
-  - Binary sensor
   - Energy
   - Sensor
 ha_release: 2026.10
@@ -12,7 +11,6 @@ ha_codeowners:
   - '@Beat-YT'
 ha_domain: hydroquebec_peak
 ha_platforms:
-  - binary_sensor
   - sensor
 ha_integration_type: service
 ha_quality_scale: bronze
@@ -47,19 +45,6 @@ For each configured offer, the integration provides the following entities. Even
 - **Event ends**
   - **Description**: End time of the peak event in progress, or of the next upcoming event. Unknown when no event is scheduled.
 
-### Binary sensors
-
-- **Peak event in progress**
-  - **Description**: On while a peak event is currently active. Turns on and off at the exact event boundaries.
-- **Peak event today AM**
-  - **Description**: On if a morning peak event is scheduled for today.
-- **Peak event today PM**
-  - **Description**: On if an evening peak event is scheduled for today.
-- **Peak event tomorrow AM**
-  - **Description**: On if a morning peak event is scheduled for tomorrow.
-- **Peak event tomorrow PM**
-  - **Description**: On if an evening peak event is scheduled for tomorrow.
-
 ## Example automations
 
 Preheat the home before a peak event by using the **Event begins** sensor with a time offset:
@@ -80,27 +65,6 @@ automation:
           entity_id: climate.living_room
         data:
           temperature: 22
-```
-
-{% endraw %}
-
-Lower the thermostats while a peak event is in progress:
-
-{% raw %}
-
-```yaml
-automation:
-  - alias: "Reduce heating during peak event"
-    triggers:
-      - trigger: state
-        entity_id: binary_sensor.credit_hivernal_residentiel_cpc_d_peak_event_in_progress
-        to: "on"
-    actions:
-      - action: climate.set_temperature
-        target:
-          entity_id: climate.living_room
-        data:
-          temperature: 18
 ```
 
 {% endraw %}
