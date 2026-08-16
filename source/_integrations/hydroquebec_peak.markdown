@@ -16,6 +16,9 @@ ha_platforms:
   - sensor
 ha_integration_type: service
 ha_quality_scale: bronze
+related:
+  - url: https://donnees.hydroquebec.com/explore/dataset/evenements-pointe/information/
+    title: Hydro-Québec peak events open data
 ---
 
 The **Hydro-Québec Peak Events** {% term integration %} tracks winter peak demand events (_événements de pointe_) published by [Hydro-Québec](https://www.hydroquebec.com/), the electricity utility of Québec, Canada.
@@ -33,22 +36,29 @@ Offer:
 
 To track more than one offer, add the integration again and select another offer. Each configured offer appears as its own service with its own set of entities.
 
-## Entities
+## Supported functionality
 
 For each configured offer, the integration provides the following entities. Events are published by Hydro-Québec a few hours before they occur, typically the day before.
 
 ### Sensors
 
-- **Event begins**: Start time of the peak event in progress, or of the next upcoming event. Unknown when no event is scheduled.
-- **Event ends**: End time of the peak event in progress, or of the next upcoming event. Unknown when no event is scheduled.
+- **Event begins**
+  - **Description**: Start time of the peak event in progress, or of the next upcoming event. Unknown when no event is scheduled.
+- **Event ends**
+  - **Description**: End time of the peak event in progress, or of the next upcoming event. Unknown when no event is scheduled.
 
 ### Binary sensors
 
-- **Peak event in progress**: On while a peak event is currently active. Turns on and off at the exact event boundaries.
-- **Peak event today AM**: On if a morning peak event is scheduled for today.
-- **Peak event today PM**: On if an evening peak event is scheduled for today.
-- **Peak event tomorrow AM**: On if a morning peak event is scheduled for tomorrow.
-- **Peak event tomorrow PM**: On if an evening peak event is scheduled for tomorrow.
+- **Peak event in progress**
+  - **Description**: On while a peak event is currently active. Turns on and off at the exact event boundaries.
+- **Peak event today AM**
+  - **Description**: On if a morning peak event is scheduled for today.
+- **Peak event today PM**
+  - **Description**: On if an evening peak event is scheduled for today.
+- **Peak event tomorrow AM**
+  - **Description**: On if a morning peak event is scheduled for tomorrow.
+- **Peak event tomorrow PM**
+  - **Description**: On if an evening peak event is scheduled for tomorrow.
 
 ## Example automations
 
@@ -97,7 +107,7 @@ automation:
 
 ## Data updates
 
-The integration {% term polling polls %} Hydro-Québec's open data every 15 minutes. The feed is served from a content delivery network and the integration uses conditional requests, so polling is lightweight. Entity states also update at event boundaries and at midnight, independently of polling.
+The integration {% term polling "polls" %} Hydro-Québec's open data every 15 minutes. The feed is served from a content delivery network and the integration uses conditional requests, so polling is lightweight. Entity states also update at event boundaries and at midnight, independently of polling.
 
 ## Known limitations
 
